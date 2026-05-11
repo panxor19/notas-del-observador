@@ -7,7 +7,7 @@ tags: ["software", "trabajo remoto", "reflexión", "vida digital"]
 category: "Tecnología"
 cover: "/images/posts/personal/cursor-noduerme.jpg"
 draft: false
-featured: false
+featured: true
 ---
 
 Hay días en que el cursor titila más fuerte que el mundo.
