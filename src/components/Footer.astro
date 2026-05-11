@@ -1,0 +1,15 @@
+---
+import { siteConfig } from '@/config/site';
+---
+
+<footer class="border-t border-[var(--line)]">
+  <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-[var(--muted)] sm:px-6 md:flex-row md:items-center md:justify-between">
+    <p>© {new Date().getFullYear()} {siteConfig.name}. Publicado como sitio estático.</p>
+    <div class="flex gap-4">
+      <a class="hover:text-[var(--fg)]" href="/rss.xml">RSS</a>
+      {siteConfig.social.github && <a class="hover:text-[var(--fg)]" href={siteConfig.social.github}>GitHub</a>}
+      {siteConfig.social.linkedin && <a class="hover:text-[var(--fg)]" href={siteConfig.social.linkedin}>LinkedIn</a>}
+      {siteConfig.social.x && <a class="hover:text-[var(--fg)]" href={siteConfig.social.x}>X</a>}
+    </div>
+  </div>
+</footer>

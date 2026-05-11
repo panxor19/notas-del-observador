@@ -1,0 +1,44 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SEO from '@/components/SEO.astro';
+import { siteConfig } from '@/config/site';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description, image, type } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO title={title} description={description} image={image} type={type} canonical={Astro.url.pathname} />
+    <script is:inline>
+      const storedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', storedTheme ? storedTheme === 'dark' : prefersDark);
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    {siteConfig.analytics.cloudflareToken && (
+      <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token":"${siteConfig.analytics.cloudflareToken}"}`}></script>
+    )}
+    {siteConfig.analytics.plausibleDomain && (
+      <script is:inline defer data-domain={siteConfig.analytics.plausibleDomain} src="https://plausible.io/js/script.js"></script>
+    )}
+  </body>
+</html>

@@ -1,0 +1,36 @@
+---
+import { siteConfig } from '@/config/site';
+import ThemeToggle from './ThemeToggle.astro';
+
+const nav = [
+  { href: '/', label: 'Inicio' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/tags', label: 'Tags' },
+  { href: '/archivo', label: 'Archivo' },
+  { href: '/sobre-mi', label: 'Sobre mí' }
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--bg)]/86 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+    <a class="font-semibold tracking-wide text-ink dark:text-paper" href="/">{siteConfig.name}</a>
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Navegación principal">
+      {nav.map((item) => (
+        <a class="rounded-md px-3 py-2 text-sm text-[var(--muted)] transition hover:bg-[var(--panel)] hover:text-[var(--fg)]" href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <div class="flex items-center gap-2">
+      <a class="hidden rounded-md border border-[var(--line)] px-3 py-2 text-sm text-[var(--muted)] transition hover:border-signal hover:text-[var(--fg)] sm:inline-flex" href="/blog">
+        Artículos
+      </a>
+      <ThemeToggle />
+    </div>
+  </div>
+  <nav class="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 pb-3 md:hidden" aria-label="Navegación móvil">
+    {nav.map((item) => (
+      <a class="shrink-0 rounded-md px-3 py-2 text-sm text-[var(--muted)]" href={item.href}>{item.label}</a>
+    ))}
+  </nav>
+</header>

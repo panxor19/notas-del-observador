@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Página no encontrada" description="La página solicitada no existe.">
+  <section class="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
+    <p class="text-sm font-medium uppercase tracking-[0.22em] text-signal dark:text-teal-300">404</p>
+    <h1 class="mt-4 text-4xl font-semibold">Página no encontrada</h1>
+    <p class="mt-4 text-[var(--muted)]">La ruta que intentas abrir no existe o fue movida.</p>
+    <a class="mt-8 inline-flex rounded-md bg-ink px-4 py-2.5 text-sm font-medium text-white hover:bg-signal dark:bg-paper dark:text-ink" href="/">Volver al inicio</a>
+  </section>
+</BaseLayout>

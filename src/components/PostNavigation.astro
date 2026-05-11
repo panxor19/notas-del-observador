@@ -1,0 +1,29 @@
+---
+import { getPostSlug, type BlogPost } from '@/utils/posts';
+
+interface Props {
+  previous?: BlogPost;
+  next?: BlogPost;
+}
+
+const { previous, next } = Astro.props;
+---
+
+<nav class="mt-10 grid gap-4 border-t border-[var(--line)] pt-8 md:grid-cols-2" aria-label="Navegación entre posts">
+  <div>
+    {previous && (
+      <a class="block rounded-lg border border-[var(--line)] bg-[var(--panel)] p-4 hover:border-signal" href={`/blog/${getPostSlug(previous)}`}>
+        <span class="text-xs uppercase tracking-wide text-[var(--muted)]">Anterior</span>
+        <strong class="mt-1 block">{previous.data.title}</strong>
+      </a>
+    )}
+  </div>
+  <div>
+    {next && (
+      <a class="block rounded-lg border border-[var(--line)] bg-[var(--panel)] p-4 text-right hover:border-signal" href={`/blog/${getPostSlug(next)}`}>
+        <span class="text-xs uppercase tracking-wide text-[var(--muted)]">Siguiente</span>
+        <strong class="mt-1 block">{next.data.title}</strong>
+      </a>
+    )}
+  </div>
+</nav>

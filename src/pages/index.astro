@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FeaturedPosts from '@/components/FeaturedPosts.astro';
+import PostCard from '@/components/PostCard.astro';
+import TagBadge from '@/components/TagBadge.astro';
+import { siteConfig } from '@/config/site';
+import { getAllTags, getPublishedPosts } from '@/utils/posts';
+
+const posts = await getPublishedPosts();
+const latestPosts = posts.slice(0, 4);
+const featuredPosts = posts.filter((post) => post.data.featured).slice(0, 3);
+const tags = getAllTags(posts).slice(0, 10);
+---
+
+<BaseLayout title={siteConfig.title} description={siteConfig.description}>
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="max-w-3xl">
+      <p class="text-sm font-medium uppercase tracking-[0.22em] text-signal dark:text-teal-300">Blog personal</p>
+      <h1 class="mt-5 text-5xl font-semibold leading-none sm:text-7xl">{siteConfig.name}</h1>
+      <p class="mt-6 max-w-2xl text-xl leading-9 text-[var(--muted)]">{siteConfig.description}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="rounded-md bg-ink px-4 py-2.5 text-sm font-medium text-white transition hover:bg-signal dark:bg-paper dark:text-ink" href="/blog">Leer artículos</a>
+        <a class="rounded-md border border-[var(--line)] px-4 py-2.5 text-sm font-medium hover:border-signal" href="/tags">Explorar tags</a>
+      </div>
+    </div>
+  </section>
+
+  <FeaturedPosts posts={featuredPosts} />
+
+  <section class="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+    <div>
+      <div class="mb-5 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-sm font-medium text-signal dark:text-teal-300">Recientes</p>
+          <h2 class="mt-1 text-2xl font-semibold">Últimos posts</h2>
+        </div>
+        <a class="text-sm text-[var(--muted)] hover:text-[var(--fg)]" href="/blog">Listado completo</a>
+      </div>
+      <div class="grid gap-4">
+        {latestPosts.map((post) => <PostCard post={post} />)}
+      </div>
+    </div>
+    <aside class="h-fit rounded-lg border border-[var(--line)] bg-[var(--panel)] p-5">
+      <h2 class="text-lg font-semibold">Temas principales</h2>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {tags.map((tag) => <TagBadge tag={tag} />)}
+      </div>
+      <a class="mt-5 inline-flex text-sm text-signal hover:underline dark:text-teal-300" href="/buscar">Buscar en el blog</a>
+    </aside>
+  </section>
+</BaseLayout>

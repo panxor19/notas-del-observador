@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Buscar" description="Búsqueda estática del blog preparada con Pagefind.">
+  <section class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+    <h1 class="text-4xl font-semibold">Buscar</h1>
+    <p class="mt-3 text-[var(--muted)]">La búsqueda se activa después de ejecutar el build con Pagefind.</p>
+    <div id="search" class="mt-8 rounded-lg border border-[var(--line)] bg-[var(--panel)] p-5"></div>
+  </section>
+  <script is:inline>
+    const container = document.querySelector('#search');
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/pagefind/pagefind-ui.css';
+    document.head.appendChild(link);
+
+    const script = document.createElement('script');
+    script.src = '/pagefind/pagefind-ui.js';
+    script.onload = () => {
+      if ('PagefindUI' in window) {
+        new window.PagefindUI({ element: '#search', showSubResults: true });
+      }
+    };
+    script.onerror = () => {
+        if (container) {
+          container.innerHTML = '<p class="text-sm text-[var(--muted)]">Ejecuta <code>npm run build:search</code> para generar el índice de búsqueda.</p>';
+        }
+    };
+    document.head.appendChild(script);
+  </script>
+</BaseLayout>

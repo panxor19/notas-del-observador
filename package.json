@@ -1,0 +1,29 @@
+{
+  "name": "notas-del-observador",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "pagefind": "pagefind --site dist",
+    "build:search": "astro check && astro build && pagefind --site dist"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "5.0.4",
+    "@astrojs/rss": "4.0.18",
+    "@astrojs/sitemap": "3.7.2",
+    "astro": "6.3.1",
+    "pagefind": "^1.1.1",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "sharp": "^0.33.5"
+  }
+}

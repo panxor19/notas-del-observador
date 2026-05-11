@@ -1,0 +1,25 @@
+---
+import type { BlogPost } from '@/utils/posts';
+import PostCard from './PostCard.astro';
+
+interface Props {
+  posts: BlogPost[];
+}
+
+const { posts } = Astro.props;
+---
+
+{posts.length > 0 && (
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div class="mb-5 flex items-end justify-between gap-4">
+      <div>
+        <p class="text-sm font-medium text-signal dark:text-teal-300">Destacados</p>
+        <h2 class="mt-1 text-2xl font-semibold">Lecturas para empezar</h2>
+      </div>
+      <a class="text-sm text-[var(--muted)] hover:text-[var(--fg)]" href="/blog">Ver todos</a>
+    </div>
+    <div class="grid gap-4 md:grid-cols-3">
+      {posts.map((post) => <PostCard post={post} featured />)}
+    </div>
+  </section>
+)}
